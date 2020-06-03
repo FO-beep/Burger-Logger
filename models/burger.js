@@ -3,7 +3,7 @@ const orm = ("../config/orm.js");
 
 const burger = {
 
-    selectAll: function (tableInput, cb) {
+    selectAll: function (cb) {
         orm.selectAll("burgers", function (res) {
             cb(res);
 
@@ -12,16 +12,16 @@ const burger = {
     },
 
     // The variables cols and vals are arrays.
-    insertOne: function (table, cols, vals, cb) {
-        orm.insertOne("burgers", table, cols, vals, function (res) {
+    insertOne: function (cols, vals, cb) {
+        orm.insertOne("burgers", cols, vals, function (res) {
             cb(res);
 
         });
 
     },
 
-    updateOne: function (table, objColVals, condition, cb) {
-        orm.updateOne("burgers", table, objColVals, condition, function (res) {
+    updateOne: function (colVals, condition, cb) {
+        orm.updateOne("burgers", colVals, condition, function (res) {
             cb(res);
         });
 
