@@ -1,0 +1,24 @@
+.jumbotron {
+  color: rgb(8, 15, 4);
+  background-color: wheat;
+  background-image: url(../img/burger1.jpeg);
+  /* url(../img/burger2.jpeg), */
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+body {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 2rem;
+  background-color: rgb(211, 92, 92);
+}
+
+.eat-burger:hover,
+.add-burger:hover,
+.delete-burger:hover {
+  opacity: 0.8;
+}
+
+.alert {
+  font-size: 1rem;
+}

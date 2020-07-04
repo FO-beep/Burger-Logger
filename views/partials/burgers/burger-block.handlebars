@@ -1,0 +1,9 @@
+{{#if eaten}}
+<p> {{burger_name}} <i data-id="{{this.id}}" id="delete-burger" align="right" class="fas fa-trash-alt"
+                style="font-size: 20px;"></i> </p>
+
+{{else}}
+
+<p><i data-id="{{this.id}}" id="eat-burger" class="fas fa-teeth-open"></i> {{burger_name}}</p>
+
+{{/if}}

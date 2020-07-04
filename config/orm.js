@@ -1,55 +1,73 @@
 //Import MYSQL connection.
-const connection = require("../config/connection.js");
+const connection = require("./connection.js");
 
-//Object for all our SQL statement functions.
+// SQL commands
+// //Object for all our SQL statement functions.
 const orm = {
-    selectAll: function (tableInput, cb) {
-        const queryString = `SELECT * FROM ${tableInput};`;
+    selectAll: function (table, cb) {
+        const queryString = `SELECT * FROM ${table};`;
         connection.query(queryString, function (err, result) {
-            if (err) {
-                throw err;
-            }
+            if (err) throw err;
             cb(result);
         });
-
     },
-
     insertOne: function (table, cols, vals, cb) {
-        const queryString = `INSERT INTO ${tableInput} SET ? `,
-            {
-                burger_name: cols,
-                devoured: vals
+        const queryString = `INSERT INTO ${table} ` +
+            `(${cols.toString()}) VALUES` +
+            `(${printQuestionMarks(vals.length)});`;
 
-            }
+        // console.log(`create: ${queryString}`);
 
-        console.log(queryString);
-        connection.query(queryString, [table, cols, vals], function (err, result) {
-            if (err) {
-                throw err;
-            }
+        connection.query(queryString, vals, function (err, result) {
+            if (err) throw err;
             cb(result);
-            console.log(result);
-
         });
     },
-
-    // An example of objColVals would be {name: bear, sleepy: true}
     updateOne: function (table, objColVals, condition, cb) {
-        const queryString = `UPDATE ${tableInput} SET devoured = ? WHERE id = ?; `;
+        const queryString = `UPDATE ${table} SET ${objToSql(objColVals)} WHERE ${condition}`
 
-        console.log(queryString);
-        connection.query(queryString, [table, objColVals, condition], function (err, result) {
-            if (err) {
-                throw err;
-            }
+        // console.log(`update: ${queryString}`)
+
+        connection.query(queryString, function (err, result) {
+            if (err) throw err;
+            cb(result);
+        });
+    },
+    delete: function (table, condition, cb) {
+        const queryString = `DELETE FROM ${table} WHERE ${condition};`
+        connection.query(queryString, function (err, result) {
+            if (err) throw err;
             cb(result);
         });
     }
-};
+}
+// ____________________________________________________________________________________
 
+function objToSql(obj) {
+    // Convert object to SQL query format
+    // column1=value, column2=value2,...
+    const arr = [];
 
+    for (var key in obj) {
+        if (obj.hasOwnProperty(key)) {
+            arr.push(`${key} = ${obj[key]}`);
+        }
+    }
+    // Convert array to string for SQL query
+    return arr.toString();
+}
 
+// ____________________________________________________________________________________
 
+function printQuestionMarks(num) {
+    const arr = [];
+
+    for (var i = 0; i < num; i++) {
+        arr.push("?");
+    }
+
+    return arr.toString();
+}
 
 
 

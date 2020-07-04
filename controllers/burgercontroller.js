@@ -1,75 +1,51 @@
 const express = require("express");
-
 const router = express.Router();
+const burger = require("../models/burger.js");
 
-//Import the model (burger.js) to use its database functions.
-const burger = ("../models/burger.js");
-
-// Create all our routes and set up logic within those routes when required.
+// Routes
 router.get("/", function (req, res) {
+    // Get all burger data from db
     burger.selectAll(function (data) {
-        let hbsObject = {
+        res.render("index", {
             burgers: data
-        };
-        console.log(hbsObject);
-        res.render("index", hbsObject);
-
-
+        });
     });
 });
 
 router.post("/api/burgers", function (req, res) {
-    burger.insertOne(["burger_name"], [req.body.burger_name], function (result) {
-        // Send back the ID of the new quote
-        res.json({
-            id: result.insertId
-        });
+    // Add new burger to db
 
-    });
-
+    burger.insertOne(["burger_name"], [req.body.burger_name], function (data) {
+        res.redirect("/");
+    })
 });
-
 
 router.put("/api/burgers/:id", function (req, res) {
-    let condition = "id = " + req.params.id;
+    let condition = `id = ${req.params.id}`;
 
-    // (colVals, condition, cb)
-    console.log("condition", condition);
+    // Update burger entry in db
     burger.updateOne({
-            devoured: req.body.devoured
-        },
-        condition,
-        function (result) {
-            if (result.changedRows == 0) {
-                // If no rows were changed, then the ID must not exist, so 404
-                return res.status(404).end();
-
-            } else {
-                res.status(200).end();
-
-            }
-
-
-        });
-});
-
-router.delete("/api/burgers/:id", function (req, res) {
-    let condition = "id = " + req.params.id;
-
-    burger.delete(condition, function (result) {
-        if (result.affectedRows == 0) {
-            // If no row were changed, then the ID must not exist, so 404
+        devoured: req.body.devoured
+    }, condition, function (result) {
+        if (result.changedRows == 0) {
             return res.status(404).end();
         } else {
             res.status(200).end();
-
         }
     });
 });
 
+router.delete("/api/burgers/:id", function (req, res) {
+    let condition = `id = ${req.params.id}`;
 
+    // Delete burger entry in db
+    burger.delete(condition, function (result) {
+        if (result.affectedRows == 0) {
+            return res.status(404).end();
+        } else {
+            res.status(200).end();
+        }
+    })
+})
 
-
-
-// Export routes for server.js to use.
 module.exports = router;
