@@ -12,7 +12,7 @@
 
 * The app will store every burger in a database, whether devoured or not.
 
-* Heroku: Deployed link - [https://burger-loggers.herokuapp.com/]..
+* Heroku: Deployed link - [https://burger-loggers.herokuapp.com/].
 
 * [Check out this video of the app for a run-through of how it works](https://youtu.be/msvdn95x9OM).
 
