@@ -1,4 +1,4 @@
-// require('dotenv').config();
+require('dotenv').config();
 const mysql = require("mysql");
 
 let connection;
@@ -10,9 +10,10 @@ if (process.env.JAWSDB_URL) {
     connection = mysql.createConnection({
         host: "localhost",
         port: 3306,
-        user: "root",
-        password: "root",
-        database: "burgers_db"
+        user: DB_USERNAME,
+        password: DB_PASSWORD,
+        database: DATABASE
+
     });
 };
 
