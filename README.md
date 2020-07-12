@@ -14,7 +14,7 @@
 
 * Heroku: Deployed link - [https://burger-loggers.herokuapp.com/].
 
-* [Check out this video of the app for a run-through of how it works](https://youtu.be/msvdn95x9OM).
+* [Check out this video of the app for a run-through of how it works](https://youtube/msvdn95x9OM).
 
 
 ```
