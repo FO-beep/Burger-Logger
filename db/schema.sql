@@ -9,7 +9,8 @@ CREATE TABLE burgers (
 id INT (10) AUTO_INCREMENT NOT NULL,
 burger_name VARCHAR (50) NOT NULL,
 devoured BOOLEAN,
-date TIMESTAMP,
+date TIMESTAMP NOT NULL,
+-- createdAt TIMESTAMP NOT NULL,
 PRIMARY KEY(id)
 );
 
