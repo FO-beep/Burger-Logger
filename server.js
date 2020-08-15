@@ -1,4 +1,6 @@
 const express = require("express");
+const mysql = require("mysql");
+
 const routes = require("./controllers/burgerController");
 
 const PORT = process.env.PORT || 8080;
