@@ -12,7 +12,7 @@
 
 * The app will store every burger in a database, whether devoured or not.
 
-* Heroku: [Click here to view the deployed link](https://burger-loggers.herokuapp.com/)
+* Heroku: [Click here to view the deployed link](https://powerful-falls-30666.herokuapp.com/)
 
 * [Check out this video of the app for a run-through of how it works](https://youtube/msvdn95x9OM).
 
